@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>广东技术师范大学 · 网络与新媒体专业 2026届毕业设计作品展</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --dark-bg: #0a0a0f;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-muted: rgba(255, 255, 255, 0.5);
+            --accent-purple: #a855f7;
+            --accent-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', 'SF Pro', system-ui, -apple-system, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            cursor: default;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, rgba(102, 126, 234, 0.03) 1px, transparent 1px),
+                linear-gradient(rgba(102, 126, 234, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .mouse-glow {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .radial-orb {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+            animation: float 20s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        .radial-orb:nth-child(1) {
+            top: -200px;
+            right: -200px;
+            animation-delay: 0s;
+        }
+
+        .radial-orb:nth-child(2) {
+            bottom: -200px;
+            left: -200px;
+            animation-delay: -10s;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.08) 0%, transparent 70%);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(50px, 50px) scale(1.1); }
+            50% { transform: translate(0, 100px) scale(1); }
+            75% { transform: translate(-50px, 50px) scale(0.9); }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+        }
+
+        .glass-strong {
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid var(--glass-border);
+        }
+
+        .gradient-text {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-text-alt {
+            background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 15px;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 1px solid var(--glass-border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--glass-bg);
+            border-color: var(--accent-purple);
+            transform: translateY(-2px);
+        }
+
+        .section-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            font-weight: 400;
+            max-width: 600px;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 16px 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav.scrolled {
+            padding: 12px 0;
+            background: rgba(10, 10, 15, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 20px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #06b6d4 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .nav-toggle span {
+            width: 24px;
+            height: 2px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 30px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 24px;
+            color: var(--text-secondary);
+        }
+
+        .hero-title {
+            font-size: clamp(40px, 8vw, 72px);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -0.03em;
+        }
+
+        .hero-title .highlight {
+            background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 24px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            font-weight: 400;
+        }
+
+        .hero-description {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 48px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        .hero-tags {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 48px;
+        }
+
+        .hero-tag {
+            padding: 10px 24px;
+            border-radius: 8px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .hero-tag:hover {
+            background: rgba(168, 85, 247, 0.1);
+            border-color: var(--accent-purple);
+            color: var(--text-primary);
+            transform: translateY(-2px);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 48px;
+        }
+
+        .filter-btn {
+            padding: 12px 28px;
+            border-radius: 30px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-secondary);
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .filter-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gradient);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .filter-btn:hover {
+            background: rgba(168, 85, 247, 0.1);
+            border-color: var(--accent-purple);
+            color: var(--text-primary);
+        }
+
+        .filter-btn.active {
+            background: var(--primary-gradient);
+            border-color: transparent;
+            color: white;
+        }
+
+        .filter-btn.active::after {
+            width: 80%;
+        }
+
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .work-card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .work-card:hover {
+            transform: translateY(-8px) rotateX(2deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(168, 85, 247, 0.3);
+        }
+
+        .work-card.hidden {
+            display: none;
+        }
+
+        .work-card-image {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .work-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .work-card:hover .work-card-image img {
+            transform: scale(1.1);
+        }
+
+        .work-card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(10, 10, 15, 0.9) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .work-card:hover .work-card-overlay {
+            opacity: 1;
+        }
+
+        .work-card-overlay span {
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .work-card:hover .work-card-overlay span {
+            transform: translateY(0);
+        }
+
+        .work-card-content {
+            padding: 20px;
+        }
+
+        .work-card-category {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: rgba(168, 85, 247, 0.1);
+            color: var(--accent-purple);
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .work-card-category.category-3d {
+            background: rgba(245, 87, 108, 0.1);
+            color: #f5576c;
+        }
+
+        .work-card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        .work-card-author {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .work-card-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .about-text p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .stat-card {
+            padding: 24px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            background: rgba(168, 85, 247, 0.1);
+            border-color: var(--accent-purple);
+            transform: translateY(-4px);
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .about-visual {
+            position: relative;
+        }
+
+        .about-visual::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            background: var(--primary-gradient);
+            border-radius: 20px;
+            opacity: 0.1;
+            filter: blur(40px);
+        }
+
+        .about-image {
+            width: 100%;
+            height: 400px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .footer {
+            padding: 60px 0 30px;
+            background: rgba(10, 10, 15, 0.8);
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .footer-logo {
+            font-size: 20px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #06b6d4 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 16px;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background: var(--primary-gradient);
+            border-color: transparent;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: var(--dark-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: white;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .modal-close:hover {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: #ef4444;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .modal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-body {
+            padding: 40px;
+        }
+
+        .modal-category {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            background: rgba(245, 87, 108, 0.15);
+            color: #f5576c;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .modal-category.category-3d {
+            background: rgba(245, 87, 108, 0.1);
+            color: #f5576c;
+        }
+
+        .modal-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .modal-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .author-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .author-name {
+            font-size: 16px;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .author-english {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .modal-description {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 32px;
+        }
+
+        .modal-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .modal-info-item {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+        }
+
+        .modal-info-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .modal-info-value {
+            font-size: 15px;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 16px;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.6);
+        }
+
+        @media (max-width: 1200px) {
+            .works-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .works-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 36px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100vh;
+                background: rgba(10, 10, 15, 0.98);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 40px;
+                transition: left 0.3s ease;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-menu a {
+                font-size: 24px;
+            }
+
+            .nav-toggle {
+                display: flex;
+                z-index: 1001;
+            }
+
+            .nav-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .nav-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .nav-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            .works-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-title {
+                font-size: 36px;
+            }
+
+            .hero-subtitle {
+                font-size: 18px;
+            }
+
+            .hero-description {
+                font-size: 16px;
+            }
+
+            .modal-content {
+                max-height: 95vh;
+            }
+
+            .modal-image {
+                height: 250px;
+            }
+
+            .modal-body {
+                padding: 24px;
+            }
+
+            .modal-title {
+                font-size: 24px;
+            }
+
+            .modal-info {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 16px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .filter-container {
+                gap: 8px;
+            }
+
+            .filter-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="mouse-glow"></div>
+    <div class="radial-orb"></div>
+    <div class="radial-orb"></div>
+
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <div class="nav-logo">GPNU · 网新毕设展</div>
+                <ul class="nav-menu">
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#works">作品</a></li>
+                    <li><a href="#about">关于</a></li>
+                    <li><a href="#contact">联系</a></li>
+                </ul>
+                <div class="nav-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">2026届毕业设计作品展</div>
+                <h1 class="hero-title">
+                    <span class="highlight">广东技术师范大学</span><br>
+                    网络与新媒体
+                </h1>
+                <h2 class="hero-subtitle">2024毕业设计作品展</h2>
+                <p class="hero-description">
+                    探索数字时代的无限可能，见证创意与技术的完美融合。本届毕设聚焦"融合·在场·未来"，展现新一代网新人的创新思维与实践能力。
+                </p>
+                <div class="hero-tags">
+                    <span class="hero-tag">数据叙事</span>
+                    <span class="hero-tag">视听传播</span>
+                    <span class="hero-tag">智能交互</span>
+                    <span class="hero-tag">数字品牌</span>
+                </div>
+                <div class="hero-buttons">
+                    <a href="#works" class="btn btn-primary">
+                        <i class="fas fa-rocket"></i>
+                        探索作品
+                    </a>
+                    <a href="#about" class="btn btn-secondary">
+                        <i class="fas fa-lightbulb"></i>
+                        策展理念
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="works">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title gradient-text-alt">精选作品</h2>
+                <p class="section-subtitle">探索短视频、交互H5与数字内容的创新实践</p>
+            </div>
+            <div class="filter-container">
+                <button class="filter-btn active" data-filter="all">全部</button>
+                <button class="filter-btn" data-filter="video">短视频</button>
+                <button class="filter-btn" data-filter="interactive">交互H5</button>
+                <button class="filter-btn" data-filter="digital">数字内容</button>
+                <button class="filter-btn" data-filter="3d">三维交互</button>
+            </div>
+            <div class="works-grid" id="worksGrid">
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h3 class="gradient-text">关于专业</h3>
+                    <p>
+                        <strong>广东技术师范大学文学与传媒学院</strong>，网络与新媒体专业培养具备内容生产、用户洞察、技术思维的复合型人才。本届毕设聚焦"融合·在场·未来"，展现学生在数字时代的创新实践能力。
+                    </p>
+                    <p>
+                        通过系统学习新媒体运营、数据分析、交互设计等核心课程，学生能够熟练运用多种数字工具，创造出具有社会价值和商业价值的优质内容作品。
+                    </p>
+                    <div class="about-stats">
+                        <div class="stat-card">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">优秀作品</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">12</div>
+                            <div class="stat-label">专业方向</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-visual">
+                    <div class="about-image">
+                        <img src="https://picsum.photos/id/1/800/600" alt="关于专业">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">GPNU · 网新毕设展</div>
+                <div class="footer-social">
+                    <a href="#" title="微信"><i class="fab fa-weixin"></i></a>
+                    <a href="#" title="微博"><i class="fab fa-weibo"></i></a>
+                    <a href="#" title="B站"><i class="fab fa-bilibili"></i></a>
+                    <a href="#" title="邮箱"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 广东技术师范大学 · 网络与新媒体专业. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-close" id="modalClose">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="modal-image">
+                <img id="modalImage" src="" alt="">
+            </div>
+            <div class="modal-body">
+                <span class="modal-category" id="modalCategory"></span>
+                <h3 class="modal-title" id="modalTitle"></h3>
+                <div class="modal-author">
+                    <div class="author-avatar" id="modalAuthorAvatar"></div>
+                    <div class="author-info">
+                        <div class="author-name" id="modalAuthorName"></div>
+                        <div class="author-english" id="modalAuthorEnglish"></div>
+                    </div>
+                </div>
+                <p class="modal-description" id="modalDescription"></p>
+                <div class="modal-info">
+                    <div class="modal-info-item">
+                        <div class="modal-info-label">作品类别</div>
+                        <div class="modal-info-value" id="modalCategoryValue"></div>
+                    </div>
+                    <div class="modal-info-item">
+                        <div class="modal-info-label">联系邮箱</div>
+                        <div class="modal-info-value" id="modalEmail"></div>
+                    </div>
+                    <div class="modal-info-item">
+                        <div class="modal-info-label">指导教师</div>
+                        <div class="modal-info-value" id="modalInstructor"></div>
+                    </div>
+                    <div class="modal-info-item">
+                        <div class="modal-info-label">完成时间</div>
+                        <div class="modal-info-value" id="modalDate"></div>
+                    </div>
+                </div>
+                <div class="modal-buttons">
+                    <a href="#" id="modalLinkBtn" target="_blank" class="btn btn-primary">
+                        <i class="fas fa-external-link-alt"></i>
+                        查看作品
+                    </a>
+                    <button id="modalCloseBtn" class="btn btn-secondary">
+                        <i class="fas fa-times"></i>
+                        关闭
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        console.log('GPNU网新毕业展 - 创意与技术共振');
+
+        const works = [
+            {
+                id: 1,
+                title: '她述',
+                author: '郭丹茹',
+                authorEnglish: 'Guo Danru',
+                category: 'video',
+                categoryLabel: '短视频·AIGC短片',
+                image: '封面图/她述.jpeg',
+                description: '以AIGC技术的视觉转译功能为基础，围绕非遗文化江永女书创作的短片，展现女书的文化底蕴与人文色彩。',
+                email: '86385778@qq.com',
+                link: 'https://www.xiaohongshu.com/discovery/item/6a21881a0000000006031934',
+                instructor: '赵翔',
+                date: '2026年5月'
+            },
+            {
+                id: 2,
+                title: '《不完美小孩》',
+                author: '甘倩敏 / 杨婉羚',
+                authorEnglish: 'Gan Qian Min / Yang Wan Ling',
+                category: 'video',
+                categoryLabel: '短视频·微电影',
+                image: 'https://picsum.photos/id/21/400/300',
+                description: '应届毕业生林小雨，在多重压力下，深陷自我否定。一次意外，她在梦境中遇见7岁的自己，她们一起去游乐园、秘密基地、教室，小雨在对话里找回勇气、坚持和相信，最终完成自我救赎。',
+                email: '1306813920@qq.com',
+                link: 'https://www.douyin.com/video/7639749242591907124',
+                instructor: '温凤鸣',
+                date: '2026年5月'
+            },
+            {
+                id: 3,
+                title: '《茶尖上的守望》',
+                author: '谭骅芳 / 杨泽莹',
+                authorEnglish: 'Tan Hua Fang / Yang Ze Ying',
+                category: 'video',
+                categoryLabel: '短视频·纪录片',
+                image: 'https://picsum.photos/id/25/400/300',
+                description: '本片聚焦凤凰单丛采茶工，以平民视角记录劳作日常，借影像诠释千年茶人的守望。',
+                email: '2767561292@qq.com',
+                link: 'https://www.bilibili.com/video/BV1idV26bEvM',
+                instructor: '温凤鸣',
+                date: '2026年5月'
+            },
+            {
+                id: 4,
+                title: '《梦入水舞村》',
+                author: '沈璐',
+                authorEnglish: 'Shen Lu',
+                category: 'interactive',
+                categoryLabel: '交互H5',
+                image: '封面图/梦入水舞村.png',
+                description: '作品以"从化水族舞"为题材，创作了可交互的H5小游戏，以游戏化和情境化的方式引导受众沉浸式体验非遗水族舞。',
+                email: '3280451070@qq.com',
+                link: 'https://r.u.h5mc.com/c/0kjl/skmn/index.html',
+                instructor: '温凤鸣',
+                date: '2026年5月'
+            },
+            {
+                id: 5,
+                title: '《何为花朝节》',
+                author: '何银城',
+                authorEnglish: 'He Yincheng',
+                category: 'digital',
+                categoryLabel: '数字内容',
+                image: 'https://picsum.photos/id/24/400/300',
+                description: '以MG动画作为演绎手法，以花朝节作为文化主题。MG动画《何为花朝节》详细讲解了花朝节的历史发展以及现状。该作品同时融合AIGC技术，探索AI与MG动画的结合。',
+                email: 'hhyc2003@168.com',
+                link: 'https://www.bilibili.com/video/BV1Tv7r6GEur',
+                instructor: '耿英华',
+                date: '2026年5月'
+            },
+            {
+                id: 6,
+                title: '瓷上牡丹',
+                author: '江薇',
+                authorEnglish: 'Jiang Wei',
+                category: 'interactive',
+                categoryLabel: '交互H5·非遗数字设计',
+                image: '封面图/瓷上牡丹.png',
+                description: '深入洛阳实地调研，原创设计牡丹花神形象，结合AIGC技术与H5交互设计，打造"牡丹瓷"为主题的可触控非遗H5。依托数字化交互，实现传统瓷艺活化传播。',
+                email: '3041221899@qq.com',
+                link: 'https://b23.tv/MZgl7DT',
+                instructor: '耿英华',
+                date: '2026年5月'
+            },
+            {
+                id: 7,
+                title: '一局时光',
+                author: '曾苏怡',
+                authorEnglish: 'Zeng Su Yi',
+                category: 'video',
+                categoryLabel: '短视频·AIGC短片',
+                image: '封面图/一局时光.jpg',
+                description: '一部以古典志怪故事烂柯人为灵感的动漫 AIGC 短片。短片把古代"山中方一日，世上已千年"的时空哲思，与当代青少年沉迷手机、虚度时光的现实议题结合，讲述初中生王智在刷手机时入梦，化身樵夫进入山林，观看仙童下棋，却在不知不觉中老去、斧柄朽烂，惊醒后幡然醒悟、放下手机、珍惜当下的故事。',
+                email: '2140271267@qq.com',
+                link: 'https://www.bilibili.com/video/BV1jjVq6PE2J',
+                instructor: '耿英华',
+                date: '2026年5月'
+            },
+            {
+                id: 8,
+                title: '筊来运转',
+                author: '刘文玉',
+                authorEnglish: 'Liu Wenyu',
+                category: 'video',
+                categoryLabel: '短视频',
+                image: 'https://picsum.photos/id/26/400/300',
+                description: '本作品以潮汕民俗筊杯为原型，原创IP形象"爻枢"，提取器物阴阳造型与祈福文化，结合国风Q版萌系设计。配套表情包、占卜小程序、潮玩摆件等文创产品，划分不同受众圈层分层传播，弱化迷信属性，将传统卜筮转化为治愈祈福的现代符号，推动潮汕小众民俗活化出圈。',
+                email: '2590234368@qq.com',
+                link: 'https://www.bilibili.com/video/BV1QDV66qEws',
+                instructor: '耿英华',
+                date: '2026年5月'
+            },
+            {
+                id: 9,
+                title: '茶话集',
+                author: '陈雨蝶',
+                authorEnglish: 'Chen Yudie',
+                category: 'interactive',
+                categoryLabel: '交互H5',
+                image: '封面图/茶话集.jpg',
+                description: '《茶话集》通过游戏化与社交化的交互呈现形式，以"宋代朋友圈"为创新叙事，还原四大茶事场景，融合点茶实操互动与宋风水墨美学，搭配雅致视听，形成"体验-学习-分享"的闭环，以年轻化形式让大众沉浸式学点茶、传非遗。',
+                email: '2471013574@qq.com',
+                link: 'https://u.u.h5mc.com/c/emx7/mnij/index.html',
+                instructor: '王子倩',
+                date: '2026年5月'
+            },
+            {
+                id: 10,
+                title: '让我看见你的世界',
+                author: '林妙芝',
+                authorEnglish: 'Lin Miaozhi',
+                category: 'interactive',
+                categoryLabel: '交互H5',
+                image: '封面图/让我看见你的世界.png',
+                description: '《让我看见你的世界》是以"认知破壁+情感共鸣"双导向为核心，主要面向18至35岁年轻大众的一款第一视角沉浸式视障体验的公益H5作品，其用轻量化的交互打破"明眼人"对视障者的认知偏见，实现"看见—理解—共情—行动"的公益传播闭环。',
+                email: '13725994724@163.com',
+                link: 'https://2.u.h5mc.com/c/aew4/bhyh/index.html',
+                instructor: '王子倩',
+                date: '2026年5月'
+            },
+            {
+                id: 11,
+                title: '高州木偶戏非遗虚拟展厅',
+                author: '马家辉',
+                authorEnglish: 'Ma Jiahui',
+                category: '3d',
+                categoryLabel: '三维交互',
+                image: '封面图/高州木偶戏非遗虚拟展厅.png',
+                description: '以Unity3D为技术平台，围绕高州木偶戏非遗打造沉浸式体验非遗传承，作品坚持一核五厅的设计，完整展示高州木偶戏传承，体验高州木偶戏的文化。',
+                email: '2337443029@qq.com',
+                link: 'https://www.bilibili.com/video/BV1BT7D6HEgf/?share_source=copy_web&vd_source=ec70e755545087948cf79a0a2e682fa2',
+                instructor: '赵翔',
+                date: '2026年5月'
+            },
+            {
+                id: 12,
+                title: '一封家书',
+                author: '陈嘉欣',
+                authorEnglish: 'CHENJIAXIN',
+                category: 'video',
+                categoryLabel: '短视频·微电影广告',
+                image: '封面图/一封家书.png',
+                description: '《一封家书》是依托AIGC进行人机协同创作的一个儿童品牌微电影广告。影片讲述留守女童小露满心期待着团聚，却等来亲人无法返乡欢聚一堂的消息，只能在夜间靠着远方寄来的宝贝小熊绘本入梦，并在梦里在奇妙小熊的陪伴下开启奇妙探险，孤单慢慢被治愈的故事......',
+                email: '1583681474@qq.com',
+                link: 'https://b23.tv/0puJd8I',
+                instructor: '张文婷',
+                date: '2026年5月18日'
+            }
+        ];
+
+        const worksGrid = document.getElementById('worksGrid');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const modal = document.getElementById('modal');
+        const modalClose = document.getElementById('modalClose');
+        const backToTop = document.getElementById('backToTop');
+        const nav = document.querySelector('.nav');
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+
+        function renderWorks(filter = 'all') {
+            worksGrid.innerHTML = '';
+            const filteredWorks = filter === 'all' ? works : works.filter(work => work.category === filter);
+            
+            filteredWorks.forEach((work, index) => {
+                const card = document.createElement('div');
+                card.className = 'work-card';
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.innerHTML = `
+                        <div class="work-card-image">
+                            <img src="${work.image}" alt="${work.title}">
+                            <div class="work-card-overlay">
+                                <span>查看详情</span>
+                            </div>
+                        </div>
+                        <div class="work-card-content">
+                            <span class="work-card-category ${work.category === '3d' ? 'category-3d' : ''}">${work.categoryLabel}</span>
+                            <h3 class="work-card-title">${work.title}</h3>
+                            <p class="work-card-author">${work.author} ${work.authorEnglish}</p>
+                            <p class="work-card-desc">${work.description}</p>
+                        </div>
+                    `;
+                card.addEventListener('click', () => openModal(work));
+                worksGrid.appendChild(card);
+            });
+        }
+
+        function openModal(work) {
+            console.log('openModal called for:', work.title);
+            document.getElementById('modalImage').src = work.image;
+            const modalCategory = document.getElementById('modalCategory');
+            modalCategory.textContent = work.categoryLabel;
+            modalCategory.className = 'modal-category ' + (work.category === '3d' ? 'category-3d' : '');
+            document.getElementById('modalTitle').textContent = work.title;
+            const firstChar = work.author.charAt(0);
+            document.getElementById('modalAuthorAvatar').textContent = firstChar;
+            document.getElementById('modalAuthorName').textContent = work.author;
+            document.getElementById('modalAuthorEnglish').textContent = work.authorEnglish;
+            document.getElementById('modalDescription').textContent = work.description;
+            document.getElementById('modalCategoryValue').textContent = work.categoryLabel;
+            document.getElementById('modalEmail').textContent = work.email;
+            document.getElementById('modalInstructor').textContent = work.instructor;
+            document.getElementById('modalDate').textContent = work.date;
+            document.getElementById('modalLinkBtn').href = work.link;
+            console.log('Link set to:', work.link);
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderWorks(btn.dataset.filter);
+            });
+        });
+
+        modalClose.addEventListener('click', closeModal);
+        document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+                backToTop.classList.add('visible');
+            } else {
+                nav.classList.remove('scrolled');
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        const mouseGlow = document.querySelector('.mouse-glow');
+        document.addEventListener('mousemove', (e) => {
+            mouseGlow.style.left = e.clientX + 'px';
+            mouseGlow.style.top = e.clientY + 'px';
+        });
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        renderWorks();
+    </script>
+</body>
+</html>
