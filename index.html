@@ -891,6 +891,49 @@
             gap: 16px;
         }
 
+        .qr-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qr-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .qr-content img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .qr-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 36px;
+            cursor: pointer;
+            padding: 5px 10px;
+            line-height: 1;
+        }
+
+        .qr-close:hover {
+            opacity: 0.7;
+        }
+
         .back-to-top {
             position: fixed;
             bottom: 30px;
@@ -1318,7 +1361,7 @@
                 authorEnglish: 'Zeng Su Yi',
                 category: 'video',
                 categoryLabel: '短视频·AIGC短片',
-                image: '封面图/一局时光.jpg',
+                image: '封面图/一局时光.png',
                 description: '一部以古典志怪故事烂柯人为灵感的动漫 AIGC 短片。短片把古代"山中方一日，世上已千年"的时空哲思，与当代青少年沉迷手机、虚度时光的现实议题结合，讲述初中生王智在刷手机时入梦，化身樵夫进入山林，观看仙童下棋，却在不知不觉中老去、斧柄朽烂，惊醒后幡然醒悟、放下手机、珍惜当下的故事。',
                 email: '2140271267@qq.com',
                 link: 'https://www.bilibili.com/video/BV1jjVq6PE2J',
@@ -1408,6 +1451,21 @@
                 link: 'https://www.bilibili.com/video/BV1J2Es6XEv9/?share_source=copy_web&vd_source=6f40a5baa04861f72a374e5b44dfdb2e',
                 instructor: '张文婷',
                 date: '2026年5月'
+            },
+            {
+                id: 14,
+                title: '粤语童谣留声机',
+                author: '麦培琪',
+                authorEnglish: 'Mai Peiqi',
+                category: 'interactive',
+                categoryLabel: '交互H5',
+                image: '封面图/粤语童谣留声机.jpg',
+                qrCode: '作品二维码/粤语童谣留声机作品二维码.jpg',
+                description: '以留声机为线索，多种交互玩法与分享机制，带你穿越时空，感受藏在粤语童谣中的文化美学。',
+                email: '2836180880@qq.com',
+                link: '#',
+                instructor: '耿英华',
+                date: '2026年5月'
             }
         ];
 
@@ -1463,10 +1521,48 @@
             document.getElementById('modalEmail').textContent = work.email;
             document.getElementById('modalInstructor').textContent = work.instructor;
             document.getElementById('modalDate').textContent = work.date;
-            document.getElementById('modalLinkBtn').href = work.link;
+            const modalLinkBtn = document.getElementById('modalLinkBtn');
+
+            // 处理有二维码的作品（如粤语童谣留声机）
+            if (work.qrCode) {
+                modalLinkBtn.innerHTML = '<i class="fas fa-qrcode"></i> 查看二维码';
+                modalLinkBtn.href = '#';
+                modalLinkBtn.target = '_self';
+                modalLinkBtn.onclick = function(e) {
+                    e.preventDefault();
+                    showQrCode(work.qrCode);
+                };
+            } else {
+                modalLinkBtn.innerHTML = '<i class="fas fa-external-link-alt"></i> 查看作品';
+                modalLinkBtn.href = work.link;
+                modalLinkBtn.target = '_blank';
+                modalLinkBtn.onclick = null;
+            }
             console.log('Link set to:', work.link);
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
+        }
+
+        // 显示二维码图片
+        function showQrCode(qrCodeSrc) {
+            let qrOverlay = document.getElementById('qrOverlay');
+            if (!qrOverlay) {
+                qrOverlay = document.createElement('div');
+                qrOverlay.id = 'qrOverlay';
+                qrOverlay.className = 'qr-overlay';
+                qrOverlay.innerHTML = '<div class="qr-content"><img src="" alt="二维码" id="qrImage"><button class="qr-close" onclick="closeQrCode()">×</button></div>';
+                document.body.appendChild(qrOverlay);
+                qrOverlay.addEventListener('click', function(e) {
+                    if (e.target === qrOverlay) closeQrCode();
+                });
+            }
+            document.getElementById('qrImage').src = qrCodeSrc;
+            qrOverlay.style.display = 'flex';
+        }
+
+        function closeQrCode() {
+            const qrOverlay = document.getElementById('qrOverlay');
+            if (qrOverlay) qrOverlay.style.display = 'none';
         }
 
         function closeModal() {
